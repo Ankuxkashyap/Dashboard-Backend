@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import userRouter from './routes/User.route.js';
 import postRouter from './routes/Post.route.js';
+import cors from 'cors';
 import { connectDB } from './config/db.js';
 import cookieParser from 'cookie-parser';
 
@@ -11,6 +12,15 @@ const app = express();
 const PORT = 5000;
 
 app.use(express.json());
+
+app.use(cors(
+    {
+        origin: "http://localhost:5173",
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE"],
+    }
+))
 app.use(cookieParser());
 connectDB();
 

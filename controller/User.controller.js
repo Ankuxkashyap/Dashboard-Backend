@@ -77,7 +77,7 @@ export const login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, // 1 day
       path: "/",
     });
-    res.status(200).json({ message: "Login Successful" });
+    res.status(200).json({ message: "Login Successful" ,user: { id: user._id, name: user.name, email: user.email }});
 
   } catch (error) {
     console.log(error);
@@ -90,9 +90,18 @@ export const logout = (req, res) => {
     httpOnly: true,
     expires: new Date(0),
     });
-    res.status(200).json({ message: "Logout Successful" });
+    res.status(200).json({ message: "Logout Successful" ,});
 }
 
 export const getProfile = async (req, res) => {
-    res.status(200).json({ user: req.user });
+    const token = req.cookies.token;
+    try {
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        res.status(200).json({ user: req.user });
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({ message: "Unauthorized" });
+    }
 }

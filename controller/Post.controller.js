@@ -2,15 +2,16 @@ import Post from "../model/Post.model.js";
 
 export const CreatePost = async (req, res) => {
   try {
-    const { title, capction, image, tags, status } = req.body;
-    if (!title || !capction || !image) {
+    const { title, caption, image, tags, status } = req.body;
+    // console.log(req.body);
+    if (!title || !caption || !image) {
       return res
         .status(400)
         .json({ message: "Please fill all the required fields" });
     }
     const newPost = new Post({
       title,
-      capction,
+      caption,
       image,
       tags,
       status,
@@ -53,7 +54,7 @@ export const GetPostById = async (req, res) => {
 };
 
 export const UpdatePost = async (req, res) => {
-  const { title, capction, image, tags, status } = req.body;
+  const { title, caption, image, tags, status } = req.body;
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -64,7 +65,7 @@ export const UpdatePost = async (req, res) => {
     }
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { title, capction, image, tags, status },
+      { title, caption, image, tags, status },
       { new: true }
     );
 
