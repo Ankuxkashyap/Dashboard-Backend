@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors(
     {
-        origin: "https://dashboard-frontend-iota-ten.vercel.app/",
+        origin: "https://dashboard-frontend-iota-ten.vercel.app",
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRouter);
-app.use('/api/post', postRouter); // Assuming postRouter is similar to userRouter
+app.use('/api/post', postRouter);
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT || PORT}`);
