@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors(
     {
-        origin: "http://localhost:5173",
+        origin: "https://dashboard-frontend-iota-ten.vercel.app/",
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
